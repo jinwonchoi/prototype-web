@@ -1,0 +1,17 @@
+프로토타입 웹
+
+포트외부오픈
+https://pythonblog.co.kr/blog/30/
+
+80,443 포트를 해제하려는 서버에 터미널(ssh)로 접속합니다.
+
+iptables 명령어를 통해 방화벽을 규칙을 관리할 수 있습니다.
+80, 443 포틑 열도록 아래 명령어를 실행 합시다.
+
+list로 확인해보면 http와 https가 적용 되었음을 확인합니다.
+
+sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT 1 -p tcp --dport 443 -j ACCEPT
+sudo iptables -I INPUT 1 -p tcp --dport 3306 -j ACCEPT
+
+sudo iptables --list
