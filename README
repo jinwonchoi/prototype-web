@@ -42,3 +42,6 @@ table layout 시트 스크립트실행 => 테이블 생성
 3. Spring Tool Suite 4를 다운받아 설치
 spring.io => Projects => Spring Tools 4 Eclipse나 vscode설치
 
+4. 테스트방법
+postman을 사용
+
