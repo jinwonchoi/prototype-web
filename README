@@ -1,17 +1,44 @@
-프로토타입 웹
+개발환경구성
+1. DB
+Mysql, mariadb 둘중 선택하여 설치
+- Mysql : mysql 설치후 쿼리툴은 mysql workbench를 사용
+- MariaDB: mariadb 설치후 쿼리툴은 DBeaver 추천
+(./doc/웹프로토타입_DB_Schema_Specification(Ver0.1).xlsx 문서에서 user, database, table layout 시트순으로 생성스크립트 사용할것)
+mariadb, mysql은 설정파일, DB구조가 동일하므로 설정 및 객체생성과정은 동일함
 
-포트외부오픈
-https://pythonblog.co.kr/blog/30/
+1.1. DB설정
+ vi /etc/mysql/my.cnf에 아래 코드를 입력합니다.
+* UTF-8설정
+[client]
+default-character-set = utf8
 
-80,443 포트를 해제하려는 서버에 터미널(ssh)로 접속합니다.
+[mysql]
+default-character-set = utf8
 
-iptables 명령어를 통해 방화벽을 규칙을 관리할 수 있습니다.
-80, 443 포틑 열도록 아래 명령어를 실행 합시다.
+[mysqld]
+collation-server = utf8_unicode_ci
+init-connect = "SET NAMES utf8"
+character-set-server = utf8
 
-list로 확인해보면 http와 https가 적용 되었음을 확인합니다.
+* 테이블 대소문자 설정
+=>default로 대소문자 구분하나 구분하지 않도록 설정하는것
+my.cnf
+[mysqld]
+lower_case_table_names = 1
 
-sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
-sudo iptables -I INPUT 1 -p tcp --dport 443 -j ACCEPT
-sudo iptables -I INPUT 1 -p tcp --dport 3306 -j ACCEPT
+적용후 service mysql restart로 서비스 재시작
 
-sudo iptables --list
+1.2. 데이터베이스생성
+root로 접속
+> mysql -u root
+접속후 위 엑셀파일 user시트 스크립트실행 => user생성
+database시트 스크립트실행 => database생성
+table layout 시트 스크립트실행 => 테이블 생성
+사용자정보등록 시트 스크립트실행 => 기본사용자 등록
+기준정보 시트 스크립트실행 => 공통기준정보 등록
+
+2. Java
+프로젝트는 Java 1.8사용
+3. Spring Tool Suite 4를 다운받아 설치
+spring.io => Projects => Spring Tools 4 Eclipse나 vscode설치
+
