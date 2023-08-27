@@ -42,6 +42,32 @@ table layout 시트 스크립트실행 => 테이블 생성
 3. Spring Tool Suite 4를 다운받아 설치
 spring.io => Projects => Spring Tools 4 Eclipse나 vscode설치
 
-4. 테스트방법
-postman을 사용
+vscode는 플러그인 2개를 설치 
+ - spring boot extension pack
+ - spring boot developer extension pack
 
+4. 실행 및 테스트방법
+vscode의 경우 프로젝트 추가후 
+src/main/java/com/gencode/issuetool/PrototypeApp.java를 열고 F5를 누르면 실행된다. 다음과 같은 로그가 출력되면 정상실행
+...
+20:01:04.648 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8083 (http) with context path '/prototype'
+...
+
+REST API기반으로 postman툴을 사용하여 rest api 호출한다.
+post방식
+url : http://localhost:8083/prototype/auth/login
+Body -> raw, JSON타입
+{
+    "loginId":"admin",
+    "passwd":"passwd"
+}
+으로 설정하고 send를 클릭하면 다음과 같은 결과값이 리턴되면 정상처리.
+{
+    "resultCode": "0001",
+    "resultMsg": "Success",
+    "item": {
+        "userInfo": {
+            "id": 1,
+            "loginId": "admin",
+            "level": "A",
+....
